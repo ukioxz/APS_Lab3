@@ -11,4 +11,4 @@ type PrintCommand struct {
  func (p *PrintCommand) Execute(loop engine.Handler) {
 	fmt.Println(p.arg)
  }
- 
+

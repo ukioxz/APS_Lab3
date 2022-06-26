@@ -20,7 +20,7 @@ type queue struct {
 }
 
 type EventLoop struct {
-	qu *queue
+	messageQueue *queue
 	stopSignal  chan struct{}
 	stopRequest bool
 }
@@ -57,3 +57,23 @@ func (qu *queue) pull(cmd Command) {
 	return result
 }
 
+func (loop *EventLoop) Start() {                        //create queue
+	loop.messageQueue = &queue{getSignal: make(chan struct{})}
+	loop.stopSignal = make(chan struct{})
+	go func() {
+		for !loop.stopRequest || !loop.messageQueue.empty() {
+			cmd := loop.messageQueue.pull()
+			cmd.Execute(loop)
+		}
+		loop.stopSignal <- struct{}{}
+	}()
+}
+
+func (loop *EventLoop) Post(cmd Command) {        //add command to queue
+	loop.messageQueue.push(cmd)
+}
+
+func (loop *EventLoop) AwaitFinish() {      //all commands are finished
+	loop.stopRequest = true  
+	<-loop.stopSignal
+}
