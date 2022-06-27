@@ -9,7 +9,6 @@ func Parse(commandLine string) Command {
 	switch parts[0] {
 	case "print":
 		return &toPrint{arg: parts[1]}
-
 	case "split":
 		arg1 := parts[1]
 		arg2 := parts[2]
