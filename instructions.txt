@@ -1,2 +1,4 @@
 print Hello
 split a:fb:dsd :
+split go,is,the,best ,
+print labisDONE
