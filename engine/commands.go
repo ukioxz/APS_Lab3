@@ -12,11 +12,13 @@ type toPrint struct {
 type toSplit struct {
 	arg1, arg2 string
 }
+
 func printText(arg string) *toPrint {
 	return &toPrint{
 		arg: arg,
 	}
 }
+
 func (p *toPrint) Execute(loop Handler) {
 	fmt.Println(p.arg)
 }
