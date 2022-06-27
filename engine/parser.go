@@ -8,7 +8,11 @@ func Parse(commandLine string) Command {
 	parts := strings.Fields(commandLine)
 	switch parts[0] {
 	case "print":
-		return &toPrint{arg: parts[1]}
+    if len(parts) > 2 {
+      return &toPrint{arg: "Error"}
+    } else {
+      return &toPrint{arg: parts[1]}
+    }
 	case "split":
 		arg1 := parts[1]
 		arg2 := parts[2]
