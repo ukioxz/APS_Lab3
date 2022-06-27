@@ -4,26 +4,12 @@ import (
   "strings"
 )
 
-func Parse(in string) Command {
-  fields := strings.Fields(in)
-
-  if len(fields) < 2 {
-    //return &ErrorMessage("incorrect number of args")
-  }
-
-  name := fields[0]
-  args := fields[1:]
-
-  switch name {
+func Parse(commandLine string) Command {
+  parts := strings.Fields(commandLine)
+  switch parts[0] {
   case "print":
-    return PrintCommand(parts[1])
-  //case "split":
-  //  arg1 := args[0]
-
-  //  arg2 := args[1]
-
-  //  return NewSplitCommand(arg1, arg2)
+    return &PrintCommand{arg: parts[1]}
   default:
-  //  return &ErrorMessage("Error command does not exist (" + in + ")")
+    return &PrintCommand{arg: "Error"}
   }
 }

@@ -1,29 +1,20 @@
-package main
+package engine
 
 import (
 	"fmt"
 )
 
-type Command interface {
-	Execute(handler Handler)
-}
-
 type PrintCommand struct {
 	arg string
 }
 
-func (pc PrintCommand) Execute(h Handler) {
-	fmt.Println(string(pc))
+func (p *PrintCommand) Execute(loop Handler) {
+  fmt.Println(p.arg)
 }
-
 type SplitCommand struct {
 	arg string
  }
 
-/*func (p *PrintCommand) Execute(loop engine.Handler) {
-	fmt.Println(p.arg)
-}*/
-
-func (s *SplitCommand) Execute(loop engine.Handler) {
+func (s *SplitCommand) Execute(loop Handler) {
 
 }
