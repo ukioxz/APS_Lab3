@@ -1,2 +1,2 @@
 print Hello
-print Golang
+split a:fb:dsd :

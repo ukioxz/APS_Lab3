@@ -2,19 +2,36 @@ package engine
 
 import (
 	"fmt"
+	"strings"
 )
 
-type PrintCommand struct {
+func printText(arg string) *toPrint {
+	return &toPrint{
+		arg: arg,
+	}
+}
+
+type toPrint struct {
 	arg string
 }
 
-func (p *PrintCommand) Execute(loop Handler) {
-  fmt.Println(p.arg)
+type toSplit struct {
+	arg1, arg2 string
 }
-type SplitCommand struct {
-	arg string
- }
 
-func (s *SplitCommand) Execute(loop Handler) {
+func (p *toPrint) Execute(loop Handler) {
+	fmt.Println(p.arg)
+}
 
+func splitText(arg1 string, arg2 string) *toSplit {
+	return &toSplit{
+		arg1: arg1,
+		arg2: arg2,
+	}
+}
+
+func (split *toSplit) Execute(h Handler) {
+	arrPart := strings.Split(split.arg1, split.arg2)
+	res := strings.Join(arrPart, "\n")
+	h.Post(printText(res))
 }
