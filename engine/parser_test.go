@@ -14,13 +14,13 @@ func TestParsePrint1(s *testing.T) {
 func TestParsePrint2(s *testing.T) {
   commandTxt := "print jinx is jinx"
 	res:= Parse(commandTxt)
-	assert.Equal(s, &toPrint{arg: "Error"}, res)
+	assert.Equal(s, &toPrint{arg: "Error. Check arguments"}, res)
 }
 
 func TestParsePrint3(s *testing.T) {
   commandTxt := "printErr shark2"
 	res:= Parse(commandTxt)
-	assert.Equal(s, &toPrint{arg: "Error"}, res)
+	assert.Equal(s, &toPrint{arg: "Error occured"}, res)
 }
 
 func TestParseSplit1(s *testing.T) {
@@ -33,13 +33,13 @@ func TestParseSplit1(s *testing.T) {
 func TestParseSplit2(s *testing.T) {
   commandTxt := "splitttt go,the,best ,"
 	res:= Parse(commandTxt)
-	assert.Equal(s, &toPrint{arg: "Error"}, res)
+	assert.Equal(s, &toPrint{arg: "Error occured"}, res)
 }
 
 func TestParseSplit3(s *testing.T) {
   commandTxt := "split go,the,best . , 5"
 	res:= Parse(commandTxt)
-	assert.Equal(s, &toPrint{arg: "Error"}, res)
+	assert.Equal(s, &toPrint{arg: "Error. Too many arguments"}, res)
 }
 
 func TestParseSplit4(s *testing.T) {
