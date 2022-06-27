@@ -4,6 +4,21 @@ import (
 	"sync"
 )
 
+
+type PrintCommand string
+
+func (pc PrintCommand) Execute(h Handler) {
+	fmt.Println(string(pc))
+}
+
+type ErrorMessage struct {
+	message string
+}
+
+func (e *ErrorMessage) Execute(loop Handler) {
+	fmt.Printf("Error: %s\n", e.message)
+}
+
 type Command interface {
 	Execute(handler Handler)
 }
@@ -74,6 +89,6 @@ func (loop *EventLoop) Post(cmd Command) {        //add command to queue
 }
 
 func (loop *EventLoop) AwaitFinish() {      //all commands are finished
-	loop.stopRequest = true  
+	loop.stopRequest = true
 	<-loop.stopSignal
 }
