@@ -3,3 +3,5 @@ split a:fb:dsd :
 split go,is,the,best ,
 print labisDONE
 print
+split
+split a:b:c:d : :
